@@ -26,7 +26,7 @@ permalink: /boris/
       })
 
         function getBoris() {
-          $('.spinner').addClass('spin')
+          $('#spinner').addClass('spin')
           event = event
           number = event.target.dataset.number || 0
           type = event.target.className
@@ -191,7 +191,7 @@ permalink: /boris/
       attachInstructionText(marker, myRoute.steps[i].instructions);
       markerArray[i] = marker;
     }
-      $('.spinner').removeClass('spin')
+      $('#spinner').removeClass('spin')
   }
 
   function attachInstructionText(marker, text) {
@@ -214,7 +214,7 @@ permalink: /boris/
       <button class="spaces" data-number="9" onclick="getBoris()">10+ spaces</button>
       <button class="spaces" data-number="19" onclick="getBoris()">20+ spaces</button>
     </div>
-    <div class="spinner">
+    <div id="spinner">
       <img src="/images/bike_wheel.png">
     </div>
     <button class="random">Random docking station</button>
