@@ -13,7 +13,7 @@ window.addEventListener("devicemotion", function(event) {
   }
   if (counter > 2) {
     var n = Math.floor(3*Math.random());
-    document.getElementById('result').innerHTML = array[n];
+    alert(array[n]);
     counter = 0;
   }
 }, true);
