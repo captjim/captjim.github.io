@@ -9,7 +9,7 @@ window.addEventListener("devicemotion", function(event) {
     pause = true;
     setTimeout(function(){
       pause = false;
-    }, 1000)
+    }, 500)
   }
   if (counter > 2) {
     var n = Math.floor(3*Math.random());
