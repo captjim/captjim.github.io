@@ -3,7 +3,7 @@ var counter = 0;
 var timer = 10;
 
 window.addEventListener("devicemotion", function(event) {
-  if ((event.acceleration.y > 1) || (event.acceleration.x > 1)) {
+  if ((event.acceleration.y > 4) || (event.acceleration.x > 4)) {
     counter = counter + 1;
     setTimeout(function(){
       if (counter < 3) {
