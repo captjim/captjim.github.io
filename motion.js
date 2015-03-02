@@ -3,14 +3,14 @@ var counter = 0;
 var timer = 10;
 
 window.addEventListener("devicemotion", function(event) {
-  var qualifies = (event.acceleration.x > 10);
-  if (qualifies) {
+  if (event.acceleration.x > 1) {
     counter +=;
-    setTimeout(function(){
-      if (counter < 3) {
-        counter = 0;
-      }
-    }, 3000);
+    // setTimeout(function(){
+    //   if (counter < 3) {
+    //     counter = 0;
+    //   }
+    // }, 3000);
+    alert(counter);
   }
   if (counter > 2) {
     var n = Math.floor(3*Math.random());
