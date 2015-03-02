@@ -1,3 +1,4 @@
+var array = ['Rock', 'Paper', 'Scissors'];
 var counter = 0;
 var timer = 10;
 
@@ -12,6 +13,7 @@ window.addEventListener("devicemotion", function(event) {
     }, 3000);
   }
   if (counter > 2) {
-    alert(event.interval);
+    var n = Math.floor(3*Math.random());
+    alert(array[n]);
   }
 }, true);
