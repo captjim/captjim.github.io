@@ -2,13 +2,12 @@ var counter = 0;
 var timer = 10;
 
 window.addEventListener("devicemotion", function(event) {
-  if (event.acceleration.x > 10) {
-    counter +=
-    setTimeout(function(){
-      if (counter < 3) {
-        counter = 0;
-      }
-    }, timer*1000)
+  var qualifies = (event.acceleration.x > 10) && (event.interval < 1000 || counter == 0);
+  if (qualifies) {
+    counter +=;
+  }
+  else {
+    counter = 0;
   }
   if (counter > 2) {
     alert(event.interval);
