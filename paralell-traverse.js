@@ -14,17 +14,35 @@ function treeFn() {
         }
       },
       amy: {
+        a: 'a',
         parent: 'tom',
-        likes: 'writing'
+        likes: 'writing',
+        b: {
+          c: {
+            d: {
+              e: {
+                f: {
+                  g: 'h',
+                  i: 'j',
+                  k: {
+                    l: {
+                      m: 'yeyeyyeye!'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 }
 
-// function argFn() { return 'amy' }
+// function argFn() { return 'm'; }
 // new Parallel(getKeys(treeFn())).require(treeFn, argFn).map(traverseKey).then(logKey);
 
-function argFn() { return 'writing' }
+function argFn() { return 'j' }
 new Parallel(getKeys(treeFn())).require(treeFn, argFn).map(traverseValue).then(logValue);
 
 // Code
@@ -43,19 +61,24 @@ function getKeys(object) {
 }
 
 function traverseKey(object) {
-  if (object[argFn()]) {
-    return object[argFn()];
-  }
-  else if (typeof(object) == "object") {
+  if (typeof(object) == 'object') {
+    if (object[argFn()]) {
+      return [object[argFn()]];
+    }
     var array = Object.keys(object);
     for (i = 0; i < array.length; i++) {
-      res = traverseKey(object[array[i]]);
+      var tmp = i;
+      var res = traverseKey(object[array[tmp]]);
       if (res) {
+        res.push(array[tmp]);
         return res;
       }
+      if (tmp + 1 == array.length) {
+        return res;
+      }
+      array[tmp] = 'not here';
     }
   }
-  return false
 }
 
 function logKey() {
@@ -64,8 +87,16 @@ function logKey() {
       resultKey.push(arguments[0][j]);
     }
   }
-  console.log('Key result:');
+  console.log('Key result stack:');
   console.log(resultKey[0]);
+  obj = treeFn();
+  for (k = resultKey[0].length - 1; k > 0; k--) {
+    console.log(obj);
+    var inter = resultKey[0][k]
+    obj = obj[inter];
+  }
+  console.log('Key result:');
+  console.log(obj);
 }
 
 function traverseValue(object) {
@@ -95,12 +126,15 @@ function logValue() {
       resultValue.push(arguments[0][j]);
     }
   }
+  console.log('Value result stack:');
+  console.log(resultValue[0]);
   obj = treeFn();
   for (k = resultValue[0].length - 1; k > 0; k--) {
+    console.log(obj);
     var inter = resultValue[0][k]
     obj = obj[inter];
   }
   console.log('Value result:');
-  console.log(resultValue[0]);
+  console.log(obj);
   console.log(obj + ' ?= ' + resultValue[0][0] + ' : ' + (resultValue[0][0] == obj));
 }
