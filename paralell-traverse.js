@@ -37,13 +37,21 @@ function treeFn() {
       }
     }
   }
+};
+
+var argCreator = function(arg) {
+  arg = arg;
+  argFn = new Function("return '" + arg + "';")
+  return argFn;
 }
 
-// function argFn() { return 'm'; }
-// new Parallel(getKeys(treeFn())).require(treeFn, argFn).map(traverseKey).then(logKey);
-
-function argFn() { return 'j' }
-new Parallel(getKeys(treeFn())).require(treeFn, argFn).map(traverseValue).then(logValue);
+var run = function() {
+  event.preventDefault();
+  document.getElementById('result').innerHTML = "";
+  argCreator(document.getElementById('arg').value);
+  new Parallel(getKeys(treeFn())).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseValue).then(logValue);
+  new Parallel(getKeys(treeFn())).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseKey).then(logKey);
+}
 
 // Code
 
@@ -87,16 +95,23 @@ function logKey() {
       resultKey.push(arguments[0][j]);
     }
   }
-  console.log('Key result stack:');
-  console.log(resultKey[0]);
+  var node1 = document.createElement("LI");
+  var node11 = document.createTextNode('Key result stack: ' + resultKey[0]);
+  node1.appendChild(node11);
+  document.getElementById('result').appendChild(node1);
   obj = treeFn();
   for (k = resultKey[0].length - 1; k > 0; k--) {
-    console.log(obj);
+    var node = document.createElement("LI");
+    var nodep = document.createTextNode('Key result stack: ' + Object.keys(obj));
+    node.appendChild(nodep);
+    document.getElementById('result').appendChild(node);
     var inter = resultKey[0][k]
     obj = obj[inter];
   }
-  console.log('Key result:');
-  console.log(obj);
+  var node2 = document.createElement("LI");
+  var node21 = document.createTextNode('Key result: ' + Object.keys(obj));
+  node2.appendChild(node21);
+  document.getElementById('result').appendChild(node2);
 }
 
 function traverseValue(object) {
@@ -126,15 +141,21 @@ function logValue() {
       resultValue.push(arguments[0][j]);
     }
   }
-  console.log('Value result stack:');
-  console.log(resultValue[0]);
+  var node1 = document.createElement("LI");
+  var node11 = document.createTextNode('Value result stack: ' + resultValue[0]);
+  node1.appendChild(node11);
+  document.getElementById('result').appendChild(node1);
   obj = treeFn();
   for (k = resultValue[0].length - 1; k > 0; k--) {
-    console.log(obj);
+    var node = document.createElement("LI");
+    var nodep = document.createTextNode('Value result stack: ' + Object.keys(obj));
+    node.appendChild(nodep);
+    document.getElementById('result').appendChild(node);
     var inter = resultValue[0][k]
     obj = obj[inter];
   }
-  console.log('Value result:');
-  console.log(obj);
-  console.log(obj + ' ?= ' + resultValue[0][0] + ' : ' + (resultValue[0][0] == obj));
+  var node2 = document.createElement("LI");
+  var node21 = document.createTextNode('Value result: ' + obj);
+  node2.appendChild(node21);
+  document.getElementById('result').appendChild(node2);
 }
