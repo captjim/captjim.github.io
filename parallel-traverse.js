@@ -12,22 +12,22 @@ function treeFn() {
           parent: 'dan',
           likes: 'teaching'
         }
-      },
-      amy: {
-        a: 'a',
-        parent: 'tom',
-        likes: 'writing',
-        b: {
-          c: {
-            d: {
-              e: {
-                f: {
-                  g: 'h',
-                  i: 'j',
-                  k: {
-                    l: {
-                      m: 'yeyeyyeye!'
-                    }
+      }
+    },
+    amy: {
+      a: 'a',
+      parent: 'tom',
+      likes: 'writing',
+      b: {
+        c: {
+          d: {
+            e: {
+              f: {
+                g: 'h',
+                i: 'j',
+                k: {
+                  l: {
+                    m: 'yeyeyyeye!'
                   }
                 }
               }
@@ -51,18 +51,21 @@ var run = function() {
   resultValue = [];
   document.getElementById('result').innerHTML = "";
   argCreator(document.getElementById('arg').value);
-  new Parallel(getKeys(treeFn())).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseValue).then(logValue);
-  new Parallel(getKeys(treeFn())).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseKey).then(logKey);
+  keysArray = getKeys(treeFn());
+  console.log(keysArray)
+  new Parallel(keysArray).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseValue).then(logValue);
+  new Parallel(keysArray).require({fn: treeFn, name: 'treeFn'}, {fn: argFn, name: 'argFn'}).map(traverseKey).then(logKey);
 }
 
 // Code
 
 var resultKey = [];
 var resultValue = [];
+var keysArray = [];
 
 function getKeys(object) {
   var keys = Object.keys(object);
-  for (i=0; i < keys.length; i++) {
+  for (i = 0; i < keys.length; i++) {
     var temp = keys[i];
     keys[i] = {};
     keys[i][temp] = object[temp];
