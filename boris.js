@@ -32,8 +32,8 @@ function getBoris() {
 
   $.ajax({
     type: "GET",
-    dataType: "xml",
-    url: "http://www.tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml",
+    dataType: "XML",
+    url: "https://tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml",
   }).done(function(xml) {
     geoFindMe(xml, type, number);
   });
