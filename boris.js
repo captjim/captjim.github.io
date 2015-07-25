@@ -71,6 +71,7 @@ function geoFindMe(xml, type, number){
       }
 
       if (type == "random") {
+        for (i=0; i<length; i++){ array.push(id) }
         id = array[Math.floor(Math.random()*array.length)];
         lat  = parseFloat(stations[id].getElementsByTagName('lat')[0].childNodes[0].textContent);
         long = parseFloat(stations[id].getElementsByTagName('long')[0].childNodes[0].textContent);
