@@ -49,6 +49,15 @@ button {
   z-index: 5;
 }
 
+.auto-update {
+  background-color: rgb(55, 161, 249);
+  border-color: rgb(55, 161, 249);
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 5;
+}
+
 #spinner {
   position: absolute;
   top: 50%;
