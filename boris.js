@@ -52,7 +52,6 @@ function geoFindMe(xml, type, number){
     }
 
     function getClosest(xml, latitude, longitude, type, number){
-
       var stations = xml.getElementsByTagName('station');
       var length   = stations.length;
       var array    = [];
@@ -68,7 +67,7 @@ function geoFindMe(xml, type, number){
 
         if ((type == "bikes") && (nbBikes > number)){ array.push([dSquared,id]); }
         else if ((type == "spaces") && (nbEmptyDocks > number)){ array.push([dSquared,id]); }
-        else { array.push(id); }
+        // else { array.push(id); }
       }
 
       if (type == "random") {
