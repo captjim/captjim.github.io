@@ -30,7 +30,7 @@ function error(error) {
   alert("Unable to retrieve your location due to " + error.code + " : " + error.message);
 };
 
-function getBoris() {
+function getBoris(event) {
   $('#spinner').addClass('spin');
   number = event.target.dataset.number || 0
   type = event.target.className
