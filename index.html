@@ -19,9 +19,17 @@
        background-image: url("http://www.daviddomoney.com/wp-content/uploads/2015/03/wildflower-meadow.jpg");
        background-size: cover;
        background-repeat: no-repeat;
-        background-position: center center;
-        height: 100vh;
-        width: 100%;
+       background-position: center center;
+       height: 100vh;
+       width: 100%;
+       position: relative;
+      }
+      #ytplayer {
+        positon: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -320px;
+        margin-top: -180px;
       }
     </style>
   </head>
@@ -31,10 +39,6 @@
     <iframe id="ytplayer" type="text/html" width="640" height="360"
       src="https://www.youtube.com/embed/FI5hDWepeIU?autoplay=0"
       frameborder="0">
-    </iframe>
-    <p>
-      
-    </p>
-    
+    </iframe>    
   </body>
 </html>
